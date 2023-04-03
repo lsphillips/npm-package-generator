@@ -1,0 +1,24 @@
+{
+	%{~ if is_node_compatible ~}
+	"extends" :
+	[
+		"protect-me-from-my-stupidity",
+		"protect-me-from-my-stupidity/and/from-writing-stupid-node-applications"
+	],
+	%{~ else ~}
+	"extends" : "protect-me-from-my-stupidity",
+	%{~ endif ~}
+
+	"env" :
+	{
+		%{~ if is_browser_compatible ~}
+		"browser" : true,
+		%{~ endif ~}
+		%{~ if is_node_compatible ~}
+		"node" : true,
+		%{~ endif ~}
+		"es6" : true
+	},
+
+	"root" : true
+}

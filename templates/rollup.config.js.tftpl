@@ -1,0 +1,64 @@
+%{ if is_browser_compatible ~}
+import { babel } from '@rollup/plugin-babel';
+import terser    from '@rollup/plugin-terser';
+%{ else ~}
+import terser from '@rollup/plugin-terser';
+%{ endif ~}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function bundle (output%{ if is_browser_compatible }, {
+	transpile = false
+} = {}%{ endif })
+{
+	const plugins = [
+		terser()
+	];
+
+	%{~ if is_browser_compatible ~}
+	if (transpile)
+	{
+		plugins.unshift(babel({
+			babelHelpers : 'bundled'
+		}));
+	}
+
+	%{~ endif ~}
+	return {
+		output, plugins, input : 'src/${ package_name }.js'
+	};
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+export default
+[
+	%{~ if is_browser_compatible ~}
+	bundle({
+		file : '${ package_name }.es5.js',
+		format : 'esm'
+	}, {
+		transpile : true
+	}),
+
+	bundle({
+		file : '${ package_name }.es5.cjs',
+		format : 'umd',
+		name : '${ package_name }',
+		exports : 'named'
+	}, {
+		transpile : true
+	}),
+
+	%{~ endif ~}
+	bundle({
+		file : '${ package_name }.cjs',
+		format : 'cjs',
+		exports : 'named'
+	}),
+
+	bundle({
+		file : '${ package_name }.js',
+		format : 'esm'
+	})
+];

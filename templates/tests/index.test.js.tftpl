@@ -1,0 +1,18 @@
+// Replace the contents of this file with the entry point
+// of your package tests.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+import { expect } from 'chai';
+import subject    from '../src/${ package_name }.js';
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+describe('the subject', function ()
+{
+	it('shall greet the world', function ()
+	{
+		expect(
+			subject()
+		).to.equal('Hello World!');
+	});
+});
