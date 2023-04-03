@@ -28,7 +28,7 @@ jobs:
           %{~ endfor ~}
 
     name: Build & Test on Node v$${{ matrix.node }}
-		%{~ else ~}
+    %{~ else ~}
     name: Build & Test
     %{~ endif ~}
 

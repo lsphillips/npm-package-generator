@@ -11,5 +11,5 @@ module "test_package_repository" {
 }
 
 output "repository_url" {
-    value = module.test_package_repository.package_repository_url
+	value = module.test_package_repository.package_repository_url
 }

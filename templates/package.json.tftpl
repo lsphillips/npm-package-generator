@@ -3,14 +3,14 @@
 
 	"version" : "1.0.0",
 
-    "type" : "module",
+	"type" : "module",
 
 	"description" : "${ package_description }",
 
 	"author" :
 	{
-	    "name" : "${ author_name }",
-	    "email" : "${ author_email }"
+		"name" : "${ author_name }",
+		"email" : "${ author_email }"
 	},
 
 	"keywords" :
@@ -21,87 +21,87 @@
 
 	"bugs" :
 	{
-	    "url" : "https://github.com/lsphillips/${ package_name }/issues"
+		"url" : "https://github.com/lsphillips/${ package_name }/issues"
 	},
 
 	"repository" :
 	{
-	    "type" : "git",
-	    "url" : "https://github.com/lsphillips/${ package_name }.git"
+		"type" : "git",
+		"url" : "https://github.com/lsphillips/${ package_name }.git"
 	},
 
 	"license" : "MIT",
 
 	"devDependencies" :
 	{
-        "chai" : "4.3.7",
-        "mocha" : "10.2.0",
-	    "eslint" : "8.37.0",
-	    "eslint-plugin-import" : "2.27.5",
-	    "eslint-plugin-promise" : "6.1.1",
-        %{~ if is_browser_compatible ~}
-        "eslint-plugin-node" : "11.1.0",
-        %{~ endif ~}
-	    "eslint-config-protect-me-from-my-stupidity" : "9.3.0",
-        "@babel/core" : "7.21.4",
-        "@babel/preset-env" : "7.21.4",
-        "rollup" : "3.20.2",
-	    "@rollup/plugin-terser" : "0.4.0",
-	    %{~ if is_browser_compatible ~}
-        "@rollup/plugin-babel" : "6.0.3"
-	    %{~ endif ~}
+		"chai" : "4.3.7",
+		"mocha" : "10.2.0",
+		"eslint" : "8.37.0",
+		"eslint-plugin-import" : "2.27.5",
+		"eslint-plugin-promise" : "6.1.1",
+		%{~ if is_browser_compatible ~}
+		"eslint-plugin-node" : "11.1.0",
+		%{~ endif ~}
+		"eslint-config-protect-me-from-my-stupidity" : "9.3.0",
+		"@babel/core" : "7.21.4",
+		"@babel/preset-env" : "7.21.4",
+		"rollup" : "3.20.2",
+		"@rollup/plugin-terser" : "0.4.0",
+		%{~ if is_browser_compatible ~}
+		"@rollup/plugin-babel" : "6.0.3"
+		%{~ endif ~}
 	},
 
-    "main" : "%{~ if is_browser_compatible ~}${ package_name }.es5.cjs%{~ else ~}${ package_name }.cjs%{~ endif ~}",
+	"main" : "%{~ if is_browser_compatible ~}${ package_name }.es5.cjs%{~ else ~}${ package_name }.cjs%{~ endif ~}",
 
-    "exports" :
-    {
+	"exports" :
+	{
 		%{~ if is_node_compatible ~}
-        "node" :
-        {
-            "import" : "${ package_name }.js",
-            "require" : "${ package_name}.cjs"
-        },
+		"node" :
+		{
+			"import" : "${ package_name }.js",
+			"require" : "${ package_name}.cjs"
+		},
 
 		%{~ endif ~}
 		%{~ if is_browser_compatible ~}
-        "browser" :
-        {
-            "import" : "${ package_name }.es5.js",
-            "require" : "${ package_name}.es5.cjs"
-        },
+		"browser" :
+		{
+			"import" : "${ package_name }.es5.js",
+			"require" : "${ package_name}.es5.cjs"
+		},
 
 		%{~ endif ~}
-        "default" : "${ package_name }.js"
-    },
+		"default" : "${ package_name }.js"
+	},
 
-    "files" :
-    [
-	    "${ package_name }.js",
-	    "${ package_name }.cjs",
-	    %{~ if is_browser_compatible ~}
-	    "${ package_name }.es5.js",
-	    "${ package_name }.es5.cjs",
-	    %{~ endif ~}
-	    "/README.md",
-	    "/CHANGELOG.md",
-	    "/LICENSE.txt",
-	    "${ package_name }.d.ts"
-    ],
+	"files" :
+	[
+		"${ package_name }.js",
+		"${ package_name }.cjs",
+		%{~ if is_browser_compatible ~}
+		"${ package_name }.es5.js",
+		"${ package_name }.es5.cjs",
+		%{~ endif ~}
+		"/README.md",
+		"/CHANGELOG.md",
+		"/LICENSE.txt",
+		"${ package_name }.d.ts"
+	],
 
 	"scripts" :
 	{
-	    "test:lint" : "eslint \"**/*.js\" --ignore-path .gitignore",
-	    "test:unit" : "mocha \"tests/**/*.test.js\"",
-	    "test" : "npm run test:lint && npm run test:unit",
-	    "build" : "rollup --config",
-	    "prepack" : "npm run test && npm run build"
+		"test:lint" : "eslint \"**/*.js\" --ignore-path .gitignore",
+		"test:unit" : "mocha \"tests/**/*.test.js\"",
+		"test" : "npm run test:lint && npm run test:unit",
+		"build" : "rollup --config",
+		"prepack" : "npm run test && npm run build"
 	},
 
 	%{~ if is_node_compatible ~}
 	"engines" :
 	{
-	    "node" : ">=${ min(supported_node_versions...) }.0.0"
+		"node" : ">=${ min(supported_node_versions...) }.0.0"
 	},
 
 	%{~ endif ~}
