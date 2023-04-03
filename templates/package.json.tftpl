@@ -46,10 +46,10 @@
 		"@babel/core" : "7.21.4",
 		"@babel/preset-env" : "7.21.4",
 		"rollup" : "3.20.2",
-		"@rollup/plugin-terser" : "0.4.0",
 		%{~ if is_browser_compatible ~}
-		"@rollup/plugin-babel" : "6.0.3"
+		"@rollup/plugin-babel" : "6.0.3",
 		%{~ endif ~}
+		"@rollup/plugin-terser" : "0.4.0"
 	},
 
 	"main" : "%{~ if is_browser_compatible ~}${ package_name }.es5.cjs%{~ else ~}${ package_name }.cjs%{~ endif ~}",
