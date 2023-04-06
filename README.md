@@ -65,6 +65,7 @@ terraform apply \
 Once the package repository is created you will still need to make the following manual actions:
 
 - Enable the `Allow GitHub Actions to create and approve pull requests` setting under `Settings > Actions > General`. This will ensure select Dependabot pull requests can be automatically approved and merged.
+- Remove all issue labels accept for the `bug` and `dependencies` tag.
 
 ## License
 
