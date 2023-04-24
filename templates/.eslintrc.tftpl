@@ -1,5 +1,5 @@
 {
-	%{~ if is_node_compatible ~}
+	%{~ if is_node_package || is_cli_package ~}
 	"extends" :
 	[
 		"protect-me-from-my-stupidity",
@@ -11,10 +11,10 @@
 
 	"env" :
 	{
-		%{~ if is_browser_compatible ~}
+		%{~ if is_browser_package ~}
 		"browser" : true,
 		%{~ endif ~}
-		%{~ if is_node_compatible ~}
+		%{~ if is_node_package || is_cli_package ~}
 		"node" : true,
 		%{~ endif ~}
 		"es6" : true

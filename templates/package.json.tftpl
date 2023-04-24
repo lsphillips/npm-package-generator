@@ -32,6 +32,13 @@
 
 	"license" : "MIT",
 
+	%{~ if is_cli_package ~}
+	"dependencies" :
+	{
+		"commander" : "10.0.0"
+	},
+
+	%{~ endif ~}
 	"devDependencies" :
 	{
 		"chai" : "4.3.7",
@@ -39,24 +46,24 @@
 		"eslint" : "8.37.0",
 		"eslint-plugin-import" : "2.27.5",
 		"eslint-plugin-promise" : "6.1.1",
-		%{~ if is_browser_compatible ~}
+		%{~ if is_browser_package ~}
 		"eslint-plugin-node" : "11.1.0",
 		%{~ endif ~}
 		"eslint-config-protect-me-from-my-stupidity" : "9.3.0",
 		"@babel/core" : "7.21.4",
 		"@babel/preset-env" : "7.21.4",
 		"rollup" : "3.20.2",
-		%{~ if is_browser_compatible ~}
+		%{~ if is_browser_package ~}
 		"@rollup/plugin-babel" : "6.0.3",
 		%{~ endif ~}
 		"@rollup/plugin-terser" : "0.4.0"
 	},
 
-	"main" : "%{~ if is_browser_compatible ~}${ package_name }.es5.cjs%{~ else ~}${ package_name }.cjs%{~ endif ~}",
+	"main" : "%{~ if is_browser_package ~}${ package_name }.es5.cjs%{~ else ~}${ package_name }.cjs%{~ endif ~}",
 
 	"exports" :
 	{
-		%{~ if is_node_compatible ~}
+		%{~ if is_node_package ~}
 		"node" :
 		{
 			"import" : "${ package_name }.js",
@@ -64,7 +71,7 @@
 		},
 
 		%{~ endif ~}
-		%{~ if is_browser_compatible ~}
+		%{~ if is_browser_package ~}
 		"browser" :
 		{
 			"import" : "${ package_name }.es5.js",
@@ -75,11 +82,21 @@
 		"default" : "${ package_name }.js"
 	},
 
+	%{~ if is_cli_package ~}
+	"bin" :
+	{
+		"${ package_name }" : "${ package_name }.cli.js"
+	},
+
+	%{~ endif ~}
 	"files" :
 	[
 		"${ package_name }.js",
 		"${ package_name }.cjs",
-		%{~ if is_browser_compatible ~}
+		%{~ if is_cli_package ~}
+		"${ package_name }.cli.js",
+		%{~ endif ~}
+		%{~ if is_browser_package ~}
 		"${ package_name }.es5.js",
 		"${ package_name }.es5.cjs",
 		%{~ endif ~}
@@ -98,7 +115,7 @@
 		"prepack" : "npm run test && npm run build"
 	},
 
-	%{~ if is_node_compatible ~}
+	%{~ if is_node_package || is_cli_package ~}
 	"engines" :
 	{
 		"node" : ">=${ min(supported_node_versions...) }.0.0"

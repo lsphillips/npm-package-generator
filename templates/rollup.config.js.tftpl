@@ -1,4 +1,4 @@
-%{ if is_browser_compatible ~}
+%{ if is_browser_package ~}
 import { babel } from '@rollup/plugin-babel';
 import terser    from '@rollup/plugin-terser';
 %{ else ~}
@@ -7,7 +7,7 @@ import terser from '@rollup/plugin-terser';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function bundle (output%{ if is_browser_compatible }, {
+function bundle (input, output%{ if is_browser_package }, {
 	transpile = false
 } = {}%{ endif })
 {
@@ -15,7 +15,7 @@ function bundle (output%{ if is_browser_compatible }, {
 		terser()
 	];
 
-	%{~ if is_browser_compatible ~}
+	%{~ if is_browser_package ~}
 	if (transpile)
 	{
 		plugins.unshift(babel({
@@ -25,7 +25,9 @@ function bundle (output%{ if is_browser_compatible }, {
 
 	%{~ endif ~}
 	return {
-		output, plugins, input : 'src/${ package_name }.js'
+		input,
+		output,
+		plugins
 	};
 }
 
@@ -33,15 +35,22 @@ function bundle (output%{ if is_browser_compatible }, {
 
 export default
 [
-	%{~ if is_browser_compatible ~}
-	bundle({
+	%{~ if is_cli_package ~}
+	bundle('cli/${ package_name }.js', {
+		file : '${ package_name }.cli.js',
+		format : 'esm'
+	}),
+	%{~ endif ~}
+
+	%{~ if is_browser_package ~}
+	bundle('lib/${ package_name }.js', {
 		file : '${ package_name }.es5.js',
 		format : 'esm'
 	}, {
 		transpile : true
 	}),
 
-	bundle({
+	bundle('lib/${ package_name }.js', {
 		file : '${ package_name }.es5.cjs',
 		format : 'umd',
 		name : '${ package_name }',
@@ -51,13 +60,13 @@ export default
 	}),
 
 	%{~ endif ~}
-	bundle({
+	bundle('lib/${ package_name }.js', {
 		file : '${ package_name }.cjs',
 		format : 'cjs',
 		exports : 'named'
 	}),
 
-	bundle({
+	bundle('lib/${ package_name }.js', {
 		file : '${ package_name }.js',
 		format : 'esm'
 	})

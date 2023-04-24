@@ -9,22 +9,28 @@ variable "package_description" {
 	description = "A short description describing the package."
 }
 
-variable "is_browser_compatible" {
+variable "is_browser_package" {
 	type        = bool
 	default     = true
 	description = "Indicates whether the package is compatible with a web browser environment."
 }
 
-variable "is_node_compatible" {
+variable "is_node_package" {
 	type        = bool
 	default     = true
 	description = "Indicates whether the package is compatible with a NodeJS environment."
 }
 
+variable "is_cli_package" {
+	type        = bool
+	default     = false
+	description = "Indicates whether the package includes a CLI executable to be installed into the PATH."
+}
+
 variable "supported_node_versions" {
 	type        = list(number)
 	default     = [16, 18]
-	description = "A list of NodeJS versions that the package supports. Only applicable if `is_node_compatible` is `true`."
+	description = "A list of NodeJS versions that the package supports. Only applicable if `is_node_package` is `true`."
 }
 
 variable "author_name" {
