@@ -17,7 +17,7 @@ Create a `main.tf` file and utilize like any normal module:
 
 ``` tf
 module "test_package_repository" {
-    source       = "https://github.com/lsphillips/npm-package-generator.git"
+    source       = "github.com/lsphillips/npm-package-generator"
     package_name = "test-package"
     author_name  = "Luke Phillips"
     author_email = "lsphillips.projects@gmail.com"

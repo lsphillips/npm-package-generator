@@ -1,5 +1,5 @@
 module "test_package_repository" {
-	source                  = "https://github.com/lsphillips/npm-package-generator.git"
+	source                  = "github.com/lsphillips/npm-package-generator"
 	package_name            = "test-package"
 	package_description     = "This is a test package that can only be used in a NodeJS environment."
 	is_browser_package      = false
