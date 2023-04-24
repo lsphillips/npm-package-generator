@@ -17,7 +17,7 @@ Create a `main.tf` file and utilize like any normal module:
 
 ``` tf
 module "test_package_repository" {
-    source       = "git@github.com:lsphillips/npm-package-generator.git"
+    source       = "https://github.com/lsphillips/npm-package-generator.git"
     package_name = "test-package"
     author_name  = "Luke Phillips"
     author_email = "lsphillips.projects@gmail.com"
@@ -43,16 +43,17 @@ terraform apply \
 
 ### Options
 
-| Variable                  | Type           | Required | Default    | Description                                                                                             |
-| ------------------------- | :------------: | :------: | :--------: | ------------------------------------------------------------------------------------------------------- |
-| `package_name`            | `string`       | **Yes**  |            | The name of the package being produced.                                                                 |
-| `package_description`     | `string`       | **No**   |            | A short description describing the package.                                                             |
-| `is_browser_compatible`   | `bool`         | **No**   | `true`     | Indicates whether the package is compatible with a web browser environment.                             |
-| `is_node_compatible`      | `bool`         | **No**   | `true`     | Indicates whether the package is compatible with a NodeJS environment.                                  |
-| `supported_node_versions` | `list(number)` | **No**   | `[16, 18]` | A list of NodeJS versions that the package supports. Only applicable if `is_node_compatible` is `true`. |
-| `author_name`             | `string`       | **Yes**  |            | The name of the author of the package.                                                                  |
-| `author_email`            | `string`       | **Yes**  |            | The email address for the author of the package. This will be public!                                   |
-| `is_public`               | `bool`         | **No**   | `false`    | Indicates if the package is to be public.                                                               |
+| Variable                  | Type           | Required | Default    | Description                                                                                                              |
+| ------------------------- | :------------: | :------: | :--------: | ------------------------------------------------------------------------------------------------------------------------ |
+| `package_name`            | `string`       | **Yes**  |            | The name of the package being produced.                                                                                  |
+| `package_description`     | `string`       | **No**   |            | A short description describing the package.                                                                              |
+| `is_browser_package`      | `bool`         | **No**   | `true`     | Indicates whether the package is compatible with a web browser environment.                                              |
+| `is_node_package`         | `bool`         | **No**   | `true`     | Indicates whether the package is compatible with a NodeJS environment.                                                   |
+| `is_cli_package`          | `bool`         | **No**   | `false`    | Indicates whether the package includes a CLI executable to be installed into the PATH.                                   |
+| `supported_node_versions` | `list(number)` | **No**   | `[16, 18]` | A list of NodeJS versions that the package supports. Only applicable if `is_node_package` or `is_cli_package` is `true`. |
+| `author_name`             | `string`       | **Yes**  |            | The name of the author of the package.                                                                                   |
+| `author_email`            | `string`       | **Yes**  |            | The email address for the author of the package. This will be public!                                                    |
+| `is_public`               | `bool`         | **No**   | `false`    | Indicates if the package is to be public.                                                                                |
 
 ### Outputs
 

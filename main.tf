@@ -11,7 +11,7 @@ terraform {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 locals {
-	version        = "1.0.0"
+	version        = "2.0.0"
 	temp_directory = "${path.root}/.terraform/tmp"
 }
 
@@ -20,8 +20,9 @@ locals {
 		package_name            = var.package_name
 		package_description     = var.package_description
 		is_public               = var.is_public
-		is_browser_compatible   = var.is_browser_compatible
-		is_node_compatible      = var.is_node_compatible
+		is_browser_package      = var.is_browser_package
+		is_node_package         = var.is_node_package
+		is_cli_package          = var.is_cli_package
 		supported_node_versions = var.supported_node_versions
 		author_name             = var.author_name
 		author_email            = var.author_email
@@ -95,7 +96,7 @@ resource "github_branch_protection" "main_branch_protection_rules" {
 
 	required_status_checks {
 		strict   = true
-		contexts = var.is_node_compatible ? [for node_version in var.supported_node_versions : "Build & Test on Node v${node_version}"] : ["Build & Test"]
+		contexts = var.is_node_package ? [for node_version in var.supported_node_versions : "Build & Test on Node v${node_version}"] : ["Build & Test"]
 	}
 
 	required_pull_request_reviews {
@@ -155,16 +156,21 @@ resource "github_repository_file" "package_lock_file" {
 }
 
 resource "github_repository_file" "package_startup_files" {
-	for_each = toset([
-		"src/index.js",
-		"tests/index.test.js",
-		"index.d.ts",
-		"README.md",
-		"CHANGELOG.md",
-		"rollup.config.js",
-		".eslintrc",
-		"tests/.eslintrc",
-	])
+	for_each = toset(
+		concat([
+			"lib/index.js",
+			"tests/index.test.js",
+			"index.d.ts",
+			"README.md",
+			"CHANGELOG.md",
+			"rollup.config.js",
+			".eslintrc",
+			"tests/.eslintrc"
+		], var.is_cli_package ? [
+			"cli/index.js",
+			"cli/.eslintrc"
+		] : [])
+	)
 
 	repository          = github_repository.repository.name
 	branch              = "main"

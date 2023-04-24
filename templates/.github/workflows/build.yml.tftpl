@@ -19,7 +19,7 @@ jobs:
 
   build-and-test:
 
-    %{~ if is_node_compatible ~}
+    %{~ if is_node_package ~}
     strategy:
       matrix:
         node:

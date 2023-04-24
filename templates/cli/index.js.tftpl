@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+import { Command } from 'commander';
+import main        from '../lib/${ package_name }.js';
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+const program = new Command()
+	.name('bps')
+	.version('1.0.0')
+	.description('${ package_description }')
+	.action(() =>
+	{
+		main();
+	});
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+program.parse(process.argv);
