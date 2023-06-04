@@ -11,7 +11,7 @@ terraform {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 locals {
-	version        = "2.0.0"
+	version        = "2.1.0"
 	temp_directory = "${path.root}/.terraform/tmp"
 }
 
@@ -165,6 +165,7 @@ resource "github_repository_file" "package_startup_files" {
 			"CHANGELOG.md",
 			"rollup.config.js",
 			".eslintrc",
+			".nvmrc",
 			"tests/.eslintrc"
 		], var.is_cli_package ? [
 			"cli/index.js",
