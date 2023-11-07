@@ -29,7 +29,7 @@ variable "is_cli_package" {
 
 variable "supported_node_versions" {
 	type        = list(number)
-	default     = [16, 18]
+	default     = [18, 20]
 	description = "A list of NodeJS versions that the package supports. Only applicable if `is_node_package` is `true`."
 }
 
