@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Changed
 
 - Updated the package dependency versions.
-- Updated the default supported node versions to `v18` and `v20`.
+- Updated the default supported Node versions to `v18` and `v20`.
 
 ## 2.1.0 - 2023-06-04
 
