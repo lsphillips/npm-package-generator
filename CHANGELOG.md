@@ -2,6 +2,13 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.2.1 - 2023-11-07
+
+### Changed
+
+- Updated the package dependency versions.
+- Updated the default supported node versions to `v18` and `v20`.
+
 ## 2.1.0 - 2023-06-04
 
 ### Added

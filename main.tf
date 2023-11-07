@@ -11,7 +11,7 @@ terraform {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 locals {
-	version        = "2.1.0"
+	version        = "2.1.1"
 	temp_directory = "${path.root}/.terraform/tmp"
 }
 
