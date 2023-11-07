@@ -35,28 +35,28 @@
 	%{~ if is_cli_package ~}
 	"dependencies" :
 	{
-		"commander" : "10.0.0"
+		"commander" : "11.1.0"
 	},
 
 	%{~ endif ~}
 	"devDependencies" :
 	{
-		"chai" : "4.3.7",
+		"chai" : "4.3.10",
 		"mocha" : "10.2.0",
-		"eslint" : "8.37.0",
-		"eslint-plugin-import" : "2.27.5",
+		"eslint" : "8.53.0",
+		"eslint-plugin-import" : "2.29.0",
 		"eslint-plugin-promise" : "6.1.1",
 		%{~ if is_browser_package ~}
 		"eslint-plugin-node" : "11.1.0",
 		%{~ endif ~}
-		"eslint-config-protect-me-from-my-stupidity" : "9.3.0",
-		"@babel/core" : "7.21.4",
-		"@babel/preset-env" : "7.21.4",
-		"rollup" : "3.20.2",
+		"eslint-config-protect-me-from-my-stupidity" : "9.5.1",
+		"@babel/core" : "7.23.2",
+		"@babel/preset-env" : "7.23.2",
+		"rollup" : "4.3.0",
 		%{~ if is_browser_package ~}
-		"@rollup/plugin-babel" : "6.0.3",
+		"@rollup/plugin-babel" : "6.0.4",
 		%{~ endif ~}
-		"@rollup/plugin-terser" : "0.4.0"
+		"@rollup/plugin-terser" : "0.4.4"
 	},
 
 	"main" : "%{~ if is_browser_package ~}${ package_name }.es5.cjs%{~ else ~}${ package_name }.cjs%{~ endif ~}",
